@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Display Page</title>
+	<link rel="stylesheet" href="style.css"> 
+    <style>
+        table{
+            color: #ffb703;
+            background-color: #023047;
+            margin-top: 20px;
+            position: absolute; 
+            top: 30%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            
+        }
+        th{
+            padding: 10px;
+        }
+        td{
+            background-color: #ffb703;
+            color: #023047;
+            text-align:  center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="fav">Codiz World</div>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="create.php">Create</a></li>
+            <li><a href="edit.php">Update</a></li>
+            <li><a href="read.php">Display</a></li>
+            <li><a href="delete.php">Delete</a></li>
+        </ul>
+    </div>
+
+
+<?php
+include_once("config.php");
+$result = mysqli_query($conn, "SELECT * FROM users ORDER BY id DESC"); 
+?>
+
+<table width='70%' border=0>
+
+    <tr>
+        <th>Name</th> <th>Age</th> <th>Email</th>
+    </tr>
+
+<?php  
+    while($user_data = mysqli_fetch_array($result)) {         
+        echo "<tr>";
+        echo "<td>".$user_data['name']."</td>";
+        echo "<td>".$user_data['age']."</td>";
+        echo "<td>".$user_data['email']."</td>"; 
+		echo "</tr>" ;
+    }
+
+
+?>
+</table>
+
+</body>
+</html>
